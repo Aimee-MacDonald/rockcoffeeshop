@@ -1,0 +1,9 @@
+{
+  "name": "rockcoffeeshop",
+  "version": "0.1.0",
+  "description": "Point of Sales System for Rock Coffee Shop",
+  "main": "main.js",
+  "repository": "https://github.com/Aimee-MacDonald/rockcoffeeshop.git",
+  "author": "Aimee MacDonald <aimeelmacdonald@gmail.com>",
+  "license": "MIT"
+}
