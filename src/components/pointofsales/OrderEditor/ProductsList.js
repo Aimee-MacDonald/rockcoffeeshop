@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+import { StateContext } from '../../../state/StateProvider'
 
 const ProductList = () => {
-  const addItem = item => console.log(`Add Item: ${item}`)
+  const state = useContext(StateContext)
+  const { orders, setOrders, activeOrder } = state
+
+  const addItem = item => {
+    const newOrders = orders.map((order, i) => {
+      if(i === activeOrder) {
+        order.items.push({
+          name: item
+        })
+
+        return order
+      } else {
+        return order
+      }
+    })
+
+    setOrders(newOrders)
+  }
 
   return (
     <ul>

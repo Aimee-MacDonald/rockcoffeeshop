@@ -1,24 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+
+import { StateContext } from '../state/StateProvider'
 
 import OrderEditor from '../components/pointofsales/OrderEditor/OrderEditor'
 import OrdersList from '../components/pointofsales/OrdersList'
 
 const PointOfSales = () => {
-  const [ editing, setEditing ] = useState(false)
-
-  const newOrder = () => {
-    setEditing(true)
-  }
-
-  const back = () => {
-    setEditing(false)
-  }
+  const state = useContext(StateContext)
+  const { activeOrder } = state
 
   return (
     <StyledPointOfSales>
-      {editing && <OrderEditor back={ back }/>}
-      {!editing && <OrdersList newOrder={ newOrder }/>}
+      {activeOrder !== null && <OrderEditor />}
+      {activeOrder === null && <OrdersList />}
     </StyledPointOfSales>
   )
 }
