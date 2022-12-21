@@ -16,7 +16,7 @@ const MainComponent = () => (
 )
 
 const StyledMainComponent = styled.div`
-  background-color: green;
+  background-color: red;
   width: 100vw;
   height: 100vh;
 `
