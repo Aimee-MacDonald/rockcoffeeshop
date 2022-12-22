@@ -12,10 +12,8 @@ const OrdersList = () => {
 
   const newOrder = () => {
     setOrders(orders => ([ ...orders, {
-      name: 'New Order',
-      items: [{
-        name: 'Item Name'
-      }]
+      name: `Order ${ orders.length + 1 }`,
+      items: []
     } ]))
     setActiveOrder(orders.length)
   }
@@ -25,8 +23,9 @@ const OrdersList = () => {
       <li><button type='button' onClick={ newOrder }>New Order</button></li>
 
       {orders.map((order, i) => (
-        <li>
+        <li className='order'>
           <p>{ order.name }</p>
+          <p>{ `R ${50}` }</p>
           <button type='button' onClick={() => setActiveOrder(i)}>Edit</button>
         </li>
       ))}
@@ -36,6 +35,21 @@ const OrdersList = () => {
 
 const StyledOrdersList = styled.ul`
   background-color: green;
+  width: 40%;
+  height: 80%;
+  display: flex;
+  flex-flow: nowrap column;
+  align-items: center;
+
+  .order {
+    width: 100%;
+    background-color: red;
+    display: flex;
+    flex-flow: nowrap row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0.4rem 0;
+  }
 `
 
 export default OrdersList
