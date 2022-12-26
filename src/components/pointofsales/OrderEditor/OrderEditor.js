@@ -8,12 +8,17 @@ import Order from './Order'
 
 const OrderEditor = () => {
   const state = useContext(StateContext)
-  const { orders, activeOrder, setActiveOrder } = state
+  const { orders, setOrders, activeOrder, setActiveOrder } = state
 
   return (
     <StyledOrderEditor>
       <button type='button' onClick={ () => setActiveOrder(null) }>Back</button>
-      <input id='name' placeholder='name' value={ orders[activeOrder].name } />
+      <input
+        id='name'
+        placeholder='name'
+        value={ orders[activeOrder].name }
+        onChange={ e => setOrders(orders => orders.map(ord => ord.id !== activeOrder ? ord : ({ ...ord, name: e.target.value }))) }
+      />
 
       <div id='orderEditorContainer'>
         <ProductsList/>
