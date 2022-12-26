@@ -30,7 +30,7 @@ const ProductList = () => {
   return (
     <StyledProductList>
       {products.map(product => (
-        <li>
+        <li key={ product.id }>
           <button type='button' onClick={ () => addItem(product.id) }>
             <h1>{ product.name }</h1>
             <h2>{ `R ${product.price}` }</h2>

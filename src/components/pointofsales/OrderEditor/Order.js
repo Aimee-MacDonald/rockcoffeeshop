@@ -10,7 +10,7 @@ const Order = () => {
   return (
     <StyledOrder>
       {orders[activeOrder].items && orders[activeOrder].items.map(orderItem => orderItem.quantity > 0 && (
-        <li>
+        <li key={ orderItem.id }>
           <p>{ orderItem.quantity }</p>
           <p>{ orderItem.name }</p>
           <p>{ `R ${ orderItem.price * orderItem.quantity }` }</p>
