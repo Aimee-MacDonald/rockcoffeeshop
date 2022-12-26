@@ -18,7 +18,8 @@ const OrdersList = () => {
       items: products.map(prd => ({
         id: prd.id,
         name: prd.name,
-        quantity: 0
+        quantity: 0,
+        price: prd.price
       }))
     }]))
 
@@ -32,7 +33,7 @@ const OrdersList = () => {
       {orders.map((order, i) => (
         <li className='order'>
           <p>{ order.name }</p>
-          <p>{ `R ${50}` }</p>
+          <p>{ `R ${ order.items.reduce((acc, it) => acc + (it.quantity * it.price), 0) }` }</p>
           <button type='button' onClick={() => setActiveOrder(i)}>Edit</button>
         </li>
       ))}

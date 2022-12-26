@@ -13,9 +13,14 @@ const Order = () => {
         <li>
           <p>{ orderItem.quantity }</p>
           <p>{ orderItem.name }</p>
-          <p>R 30</p>
+          <p>{ `R ${ orderItem.price * orderItem.quantity }` }</p>
         </li>
       ))}
+
+      <li>
+        <p>Total:</p>
+        <p>{` R ${ orders[activeOrder].items.reduce((acc, it) => acc + (it.quantity * it.price), 0) } `}</p>
+      </li>
     </StyledOrder>
   )
 }
