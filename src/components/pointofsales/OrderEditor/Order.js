@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import styled from 'styled-components'
 
 import { StateContext } from '../../../state/StateProvider'
 
@@ -7,10 +8,39 @@ const Order = () => {
   const { orders, activeOrder } = state
 
   return (
-    <ul>
-      {orders[activeOrder].items.map(orderItem => <li>{ orderItem.name }</li>)}
-    </ul>
+    <StyledOrder>
+      {orders[activeOrder].items && orders[activeOrder].items.map(orderItem => orderItem.quantity > 0 && (
+        <li>
+          <p>{ orderItem.quantity }</p>
+          <p>{ orderItem.name }</p>
+          <p>R 30</p>
+        </li>
+      ))}
+    </StyledOrder>
   )
 }
+
+const StyledOrder = styled.ul`
+  background-color: red;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-flow: nowrap column;
+
+  li {
+    background-color: green;
+    width: 100%;
+    display: flex;
+    margin-top: 0.4rem;
+    flex-flow: nowrap row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    p {
+      width: 100%;
+      text-align: center;
+    }
+  }
+`
 
 export default Order

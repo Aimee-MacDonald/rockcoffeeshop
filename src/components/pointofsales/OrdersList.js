@@ -6,21 +6,28 @@ import { StateContext } from '../../state/StateProvider'
 const OrdersList = () => {
   const state = useContext(StateContext)
   const { 
+    products,
     orders, setOrders,
     setActiveOrder
   } = state
 
-  const newOrder = () => {
+  const addNewOrder = () => {
     setOrders(orders => ([ ...orders, {
+      id: orders.length,
       name: `Order ${ orders.length + 1 }`,
-      items: []
-    } ]))
+      items: products.map(prd => ({
+        id: prd.id,
+        name: prd.name,
+        quantity: 0
+      }))
+    }]))
+
     setActiveOrder(orders.length)
   }
 
   return (
     <StyledOrdersList>
-      <li><button type='button' onClick={ newOrder }>New Order</button></li>
+      <li><button type='button' onClick={ addNewOrder }>New Order</button></li>
 
       {orders.map((order, i) => (
         <li className='order'>
@@ -48,7 +55,7 @@ const StyledOrdersList = styled.ul`
     flex-flow: nowrap row;
     justify-content: space-evenly;
     align-items: center;
-    margin: 0.4rem 0;
+    margin-top: 0.4rem;
   }
 `
 

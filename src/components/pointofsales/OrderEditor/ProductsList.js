@@ -5,32 +5,38 @@ import { StateContext } from '../../../state/StateProvider'
 
 const ProductList = () => {
   const state = useContext(StateContext)
-  const { orders, setOrders, activeOrder } = state
+  const { products, orders, setOrders, activeOrder } = state
 
   const addItem = item => {
-    const newOrders = orders.map((order, i) => {
-      if(i === activeOrder) {
-        order.items.push({
-          name: item
+    const ords = orders.map(ord => {
+      return activeOrder !== ord.id
+        ? ord
+        : ({
+          ...ord,
+          items: ord.items.map(it => {
+            return item !== it.id
+              ? it
+              : ({
+                ...it,
+                quantity: it.quantity + 1
+              })
+          })
         })
-
-        return order
-      } else {
-        return order
-      }
     })
 
-    setOrders(newOrders)
+    setOrders(ords)
   }
 
   return (
     <StyledProductList>
-      <li><button type='button' onClick={ () => addItem('Espresso') }>Espresso</button></li>
-      <li><button type='button' onClick={ () => addItem('Africano') }>Africano</button></li>
-      <li><button type='button' onClick={ () => addItem('Red Chino') }>Red Chino</button></li>
-      <li><button type='button' onClick={ () => addItem('Cappuccino') }>Cappuccino</button></li>
-      <li><button type='button' onClick={ () => addItem('Latte') }>Latte</button></li>
-      <li><button type='button' onClick={ () => addItem('Kickass') }>Kickass</button></li>
+      {products.map(product => (
+        <li>
+          <button type='button' onClick={ () => addItem(product.id) }>
+            <h1>{ product.name }</h1>
+            <h2>{ `R ${product.price}` }</h2>
+          </button>
+        </li>
+      ))}
     </StyledProductList>
   )
 }
