@@ -31,7 +31,7 @@ const OrdersList = () => {
       <li><button type='button' onClick={ addNewOrder }>New Order</button></li>
 
       {orders.map((order, i) => (
-        <li className='order'>
+        <li className='order' key={ `order_${order.id}` }>
           <p>{ order.name }</p>
           <p>{ `R ${ order.items.reduce((acc, it) => acc + (it.quantity * it.price), 0) }` }</p>
           <button type='button' onClick={() => setActiveOrder(order.id)}>Edit</button>
