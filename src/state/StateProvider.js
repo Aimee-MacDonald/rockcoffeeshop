@@ -1,8 +1,15 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 
 export default ({ children }) => {
   const [ orders, setOrders ] = useState([])
   const [ activeOrder, setActiveOrder ] = useState(null)
+
+  //  useEffect(() => localStorage.clear(), [])
+  useEffect(() => {
+    const st = JSON.parse(localStorage.getItem('state'))
+    if(st !== null) setOrders(st.orders)
+  }, [])
+  useEffect(() => localStorage.setItem('state', JSON.stringify(state)), [ orders ])
 
   const products = [
     { id: 0, name: 'Espresso', price: 30 },
