@@ -34,7 +34,9 @@ const OrdersList = () => {
         <li className='order'>
           <p>{ order.name }</p>
           <p>{ `R ${ order.items.reduce((acc, it) => acc + (it.quantity * it.price), 0) }` }</p>
-          <button type='button' onClick={() => setActiveOrder(i)}>Edit</button>
+          <button type='button' onClick={() => setActiveOrder(order.id)}>Edit</button>
+          <button type='button' onClick={() => setOrders(orders.filter(i => i.id !== order.id))}>Cancel</button>
+          <button type='button' onClick={() => setOrders(orders.filter(i => i.id !== order.id))}>Paid</button>
         </li>
       ))}
     </StyledOrdersList>
