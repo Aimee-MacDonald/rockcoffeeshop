@@ -5,7 +5,27 @@ import { StateContext } from '../../../state/StateProvider'
 
 const Order = () => {
   const state = useContext(StateContext)
-  const { orders, activeOrder } = state
+  const { orders, setOrders, activeOrder } = state
+
+  const removeItem = id => {
+    const no = orders.map(ord => {
+      return ord.id !== activeOrder
+        ? ord
+        : ({
+          ...ord,
+          items: ord.items.map(it => {
+            return it.id !== id
+              ? it
+              : ({
+                ...it,
+                quantity: it.quantity - 1
+              })
+          })
+        })
+    })
+
+    setOrders(no)
+  }
 
   return (
     <StyledOrder>
@@ -14,6 +34,7 @@ const Order = () => {
           <p>{ orderItem.quantity }</p>
           <p>{ orderItem.name }</p>
           <p>{ `R ${ orderItem.price * orderItem.quantity }` }</p>
+          <button onClick={ () => removeItem(orderItem.id) }>X</button>
         </li>
       ))}
 
