@@ -3,6 +3,7 @@ import React, { createContext, useState, useEffect } from 'react'
 export default ({ children }) => {
   const [ orders, setOrders ] = useState([])
   const [ activeOrder, setActiveOrder ] = useState(null)
+  const [ activeModal, setActiveModal ] = useState(true)
 
   //  useEffect(() => localStorage.clear(), [])
 
@@ -25,7 +26,8 @@ export default ({ children }) => {
   const state = {
     products,
     orders, setOrders,
-    activeOrder, setActiveOrder
+    activeOrder, setActiveOrder,
+    activeModal, setActiveModal
   }
   
   return (
