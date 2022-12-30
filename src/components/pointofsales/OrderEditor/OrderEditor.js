@@ -12,7 +12,6 @@ const OrderEditor = () => {
 
   return (
     <StyledOrderEditor>
-      <button type='button' onClick={ () => setActiveOrder(null) }>Back</button>
       <input
         id='name'
         placeholder='name'
@@ -24,6 +23,8 @@ const OrderEditor = () => {
         <ProductsList/>
         <Order/>
       </div>
+
+      <button id='backButton' type='button' onClick={ () => setActiveOrder(null) }>Back</button>
     </StyledOrderEditor>
   )
 }
@@ -34,12 +35,18 @@ const StyledOrderEditor = styled.div`
   height: 80%;
   display: flex;
   flex-flow: nowrap column;
+  align-items: flex-start;
 
   #orderEditorContainer {
     width: 100%;
     height: 100%;
     display: flex;
     flex-flow: nowrap row;
+  }
+
+  #backButton {
+    margin: 1rem auto;
+    padding: 1.5rem 6rem;
   }
 `
 
