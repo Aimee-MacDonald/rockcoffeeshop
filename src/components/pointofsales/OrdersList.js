@@ -15,6 +15,7 @@ const OrdersList = () => {
     setOrders(orders => ([ ...orders, {
       id: orders.length,
       name: `Order ${ orders.length + 1 }`,
+      status: 'OPEN',
       items: products.map(prd => ({
         id: prd.id,
         name: prd.name,
@@ -26,19 +27,43 @@ const OrdersList = () => {
     setActiveOrder(orders.length)
   }
 
+  const payOrder = orderId => {
+    console.log(orders)
+
+    const NO = orders.map(ord => {
+      return ord.id !== orderId
+        ? ord
+        : ({
+          ...ord,
+          status: 'PAID'
+        })
+    })
+
+    setOrders(NO)
+  }
+
   return (
     <StyledOrdersList>
       <li><button type='button' onClick={ addNewOrder }>New Order</button></li>
 
-      {orders.map((order, i) => (
-        <li className='order' key={ `order_${order.id}` }>
-          <p>{ order.name }</p>
-          <p>{ `R ${ order.items.reduce((acc, it) => acc + (it.quantity * it.price), 0) }` }</p>
-          <button type='button' onClick={() => setActiveOrder(order.id)}>Edit</button>
-          <button type='button' onClick={() => setOrders(orders.filter(i => i.id !== order.id))}>Cancel</button>
-          <button type='button' onClick={() => setOrders(orders.filter(i => i.id !== order.id))}>Paid</button>
-        </li>
-      ))}
+      {orders.map((order, i) => {
+        return order.status === 'OPEN' ? (
+          <li className='order' key={ `order_${order.id}` }>
+            <p>{ order.name }</p>
+            <p>{ order.status }</p>
+            <p>{ `R ${ order.items.reduce((acc, it) => acc + (it.quantity * it.price), 0) }` }</p>
+            <button type='button' onClick={() => setActiveOrder(order.id)}>Edit</button>
+            <button type='button' onClick={() => setOrders(orders.filter(i => i.id !== order.id))}>Cancel</button>
+            <button type='button' onClick={() => payOrder(order.id)}>Pay</button>
+          </li>
+        ) : (
+          <li className='order' key={ `order_${order.id}` }>
+            <p>{ order.name }</p>
+            <p>{ `R ${ order.items.reduce((acc, it) => acc + (it.quantity * it.price), 0) }` }</p>
+            <button type='button' onClick={() => setOrders(orders.filter(i => i.id !== order.id))}>Cancel</button>
+          </li>
+        )
+      })}
     </StyledOrdersList>
   )
 }
