@@ -8,7 +8,9 @@ const OrdersList = () => {
   const { 
     products,
     orders, setOrders,
-    setActiveOrder
+    setActiveOrder,
+    setActiveModal,
+    setSelectedOrder
   } = state
 
   const addNewOrder = () => {
@@ -42,6 +44,11 @@ const OrdersList = () => {
     setOrders(NO)
   }
 
+  const cancelOrder = orderId => {
+    setSelectedOrder(orderId)
+    setActiveModal('CANCEL_ORDER')
+  }
+
   return (
     <StyledOrdersList>
       <li><button type='button' onClick={ addNewOrder }>New Order</button></li>
@@ -53,7 +60,7 @@ const OrdersList = () => {
             <p>{ order.status }</p>
             <p>{ `R ${ order.items.reduce((acc, it) => acc + (it.quantity * it.price), 0) }` }</p>
             <button type='button' onClick={() => setActiveOrder(order.id)}>Edit</button>
-            <button type='button' onClick={() => setOrders(orders.filter(i => i.id !== order.id))}>Cancel</button>
+            <button type='button' onClick={() => cancelOrder(order.id)}>Cancel</button>
             <button type='button' onClick={() => payOrder(order.id)}>Pay</button>
           </li>
         ) : (

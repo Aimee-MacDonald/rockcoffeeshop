@@ -3,13 +3,14 @@ import styled from 'styled-components'
 
 import { StateContext } from '../state/StateProvider'
 
+import CancelOrderModal from '../modals/CancelOrderModal'
+
 const ModalLayer = () => {
   const { activeModal, setActiveModal } = useContext(StateContext)
 
   return (
     <StyledModalLayer activeModal={ activeModal }>
-      <h1>Modal Layer</h1>
-      <button type='button' onClick={ () => setActiveModal(false) }>Close</button>
+      {activeModal === 'CANCEL_ORDER' && <CancelOrderModal/>}
     </StyledModalLayer>
   )
 }
