@@ -17,7 +17,7 @@ const ModalLayer = () => {
 
 const StyledModalLayer = styled.div`
   position: fixed;
-  z-index: 20;
+  z-index: 30;
   width: 100%;
   height: ${ ({ activeModal }) => activeModal ? '100%' : '0' };
   overflow-y: ${ ({ activeModal }) => activeModal ? 'visible' : 'hidden' };

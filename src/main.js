@@ -6,6 +6,7 @@ import StateProvider from './state/StateProvider'
 
 import GlobalStyle from '../GlobalStyle'
 import WorkspaceLayer from './layers/WorkspaceLayer'
+import ControlsLayer from './layers/ControlsLayer'
 import ModalLayer from './layers/ModalLayer'
 
 const container = document.getElementById('root')
@@ -16,6 +17,7 @@ const MainComponent = () => (
     <StyledMainComponent>
       <GlobalStyle/>
       <WorkspaceLayer/>
+      <ControlsLayer/>
       <ModalLayer/>
     </StyledMainComponent>
   </StateProvider>
