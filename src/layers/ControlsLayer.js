@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 import LayoutControl from '../controls/LayoutControl'
-import MockControl from '../controls/MockControl'
+import ExpensesControl from '../controls/ExpensesControl'
 
 const ControlsLayer = () => (
   <StyledControlsLayer>
     <LayoutControl/>
-    <MockControl/>
+    <ExpensesControl/>
   </StyledControlsLayer>
 )
 
